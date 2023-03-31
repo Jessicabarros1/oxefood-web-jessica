@@ -121,18 +121,44 @@ class FormEntregador extends React.Component{
 									</Form.Input>
 								</Form.Group>
 
-                                <Form.Group>
+								<Form.Group widths='equal'>
+									<Form.Field label='UF' control='select'>
+											   <option value='ACRE'>AC</option>
+											   <option value='ALAGOAS'>AL</option>
+											   <option value='AMAPÁ'>AP</option>
+											   <option value='AMAZONAS'>AM</option>
+											   <option value='BAHIA'>BA</option>
+											   <option value='CEARÁ'>CE</option>
+											   <option value='DISTRITO FEDERAL'>PE</option>
+											   <option value='PERNAMBUCO'>PE</option>
+											   <option value='SERGIPE'>SE</option>
+											   <option value='MARANHÃO'>MA</option>
+									</Form.Field>
+								</Form.Group>	
+
+								<Form.Group widths='equal'>
 									<Form.Input
 										fluid
-										label='UF'
-                                        width={10}>
+										label='Complemento'
+                                    >
 									</Form.Input>
-                
 								</Form.Group>
 
-                                
-
-                                
+								<Form.Group inline>
+								<label>Ativo: </label>
+								<Form.Field
+									label='Sim'
+									control='input'
+									type='radio'
+									name='htmlRadios'
+								/>
+								<Form.Field
+									label='Não'
+									control='input'
+									type='radio'
+									name='htmlRadios'
+								/>
+								</Form.Group>
 
 								<Form.Group widths='equal' style={{marginTop: '4%'}}  className='form--empresa-salvar'>
 
