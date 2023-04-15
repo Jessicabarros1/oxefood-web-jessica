@@ -94,6 +94,7 @@ class FormProduto extends React.Component{
 											color='blue'
 											floated='right'
 											onClick={this.salvar}
+										
 										>
 											<Icon name='save' />
 											Salvar
