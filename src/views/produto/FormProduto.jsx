@@ -1,8 +1,41 @@
+import axios from "axios";
 import React from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, TextArea } from 'semantic-ui-react';
 
 class FormProduto extends React.Component{
+
+	state = {
+
+		titulo: null,
+		CodigodoProduto: null,
+		Descricao: null,
+		ValorUnitario: null,
+		TempodeEntregaMinimoemMinutos: null,
+		TempodeEntregaMaximoemMinutos: null
+	}
+ 
+	salvar = () => {
+
+		let ProdutoRequest = {
+
+			titulo: this.state.titulo,
+			CodigodoProduto: this.state.CodigodoProduto,
+			Descricao: this.state.Descricao,
+			ValorUnitario: this.state.ValorUnitario,
+			TempodeEntregaMinimoemMinutos: this.state.TempodeEntregaMinimoemMinutos,
+			TempodeEntregaMaximoemMinutos: this.state.TempodeEntregaMinimoemMinutos
+		}
+	
+		axios.post("http://localhost:8082/api/Produto", ProdutoRequest)
+		.then((response) => {
+			console.log('Produto cadastrado com sucesso.')
+		})
+		.catch((error) => {
+			console.log('Erro ao incluir um Produto.')
+		})
+	}
+
 
     render(){
         return(
@@ -27,6 +60,8 @@ class FormProduto extends React.Component{
 										fluid
 										label='Titulo'
 										maxLength="100"
+										value={this.state.titulo}
+										onChange={e => this.setState({titulo: e.target.value})} 
 									/>
 
 									<Form.Input
@@ -34,8 +69,12 @@ class FormProduto extends React.Component{
 										fluid
 										label='Código do Produto'>
 										<InputMask 
-										width={8}>      
+										width={8}
+										value={this.state.CodigodoProduto}
+										onChange={e => this.setState({CodigodoProduto: e.target.value})}
+										>   
                                         </InputMask>
+
 									</Form.Input>
 
 								</Form.Group>
@@ -45,6 +84,8 @@ class FormProduto extends React.Component{
                                          control={TextArea}
                                          label='Descrição'
                                          placeholder='Descreva o Produto'
+										value={this.state.Descricao}
+										onChange={e => this.setState({VDescricao: e.target.value})} 
                                     />
                     
                                 <Form.Group>
@@ -52,19 +93,28 @@ class FormProduto extends React.Component{
                                         required
 										fluid
 										label='Valor Unitário'
-                                        width={6}>
+                                        width={6}
+										value={this.state.ValorUnitario}
+										onChange={e => this.setState({ValorUnitario: e.target.value})} 
+										>
 									</Form.Input>
 
                                     <Form.Input
                                         fluid
                                         label='Tempo de Entrega Mínimo em Minutos'
-                                        width={6}>
+                                        width={6}
+										value={this.state.TempodeEntregaMinimoemMinutos}
+										onChange={e => this.setState({TempodeEntregaMinimoemMinutos: e.target.value})} 
+										>
                                     </Form.Input>
 
                                     <Form.Input
                                         fluid
                                         label='Tempo de Entrega Maximo em Minutos'
-                                        width={6}>
+                                        width={6}
+										value={this.state.TempodeEntregaMaximoemMinutos}
+										onChange={e => this.setState({TempodeEntregaMaximoemMinutos: e.target.value})}
+										>
                                     </Form.Input>
 
 								</Form.Group>
