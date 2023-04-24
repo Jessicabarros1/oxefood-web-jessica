@@ -24,7 +24,7 @@ class FormProduto extends React.Component{
 			Descricao: this.state.Descricao,
 			ValorUnitario: this.state.ValorUnitario,
 			TempodeEntregaMinimoemMinutos: this.state.TempodeEntregaMinimoemMinutos,
-			TempodeEntregaMaximoemMinutos: this.state.TempodeEntregaMinimoemMinutos
+			TempodeEntregaMaximoemMinutos: this.state.TempodeEntregaMaximoemMinutos
 		}
 	
 		axios.post("http://localhost:8082/api/Produto", ProdutoRequest)
