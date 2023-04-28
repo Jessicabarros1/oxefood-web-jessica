@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import InputMask from 'react-input-mask';
+import { Link } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon, TextArea } from 'semantic-ui-react';
 
 class FormProduto extends React.Component{
@@ -85,7 +86,7 @@ class FormProduto extends React.Component{
                                          label='Descrição'
                                          placeholder='Descreva o Produto'
 										value={this.state.Descricao}
-										onChange={e => this.setState({VDescricao: e.target.value})} 
+										onChange={e => this.setState({Descricao: e.target.value})} 
                                     />
                     
                                 <Form.Group>
@@ -131,7 +132,8 @@ class FormProduto extends React.Component{
 										onClick={this.listar}
 										>
 										<Icon name='reply' />
-										Voltar
+										<Link to={'/list-Produto'}> Voltar</Link>
+
 									</Button>
 
 									<Container textAlign='right'>
