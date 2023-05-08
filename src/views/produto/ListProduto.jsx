@@ -60,11 +60,11 @@ class ListProduto extends React.Component{
                           <Table.Header>
                               <Table.Row>
                                   <Table.HeaderCell>Título</Table.HeaderCell>
-                                  <Table.HeaderCell>Código Produto</Table.HeaderCell>
+                                  <Table.HeaderCell>Código</Table.HeaderCell>
                                   <Table.HeaderCell>Descrição</Table.HeaderCell>
                                   <Table.HeaderCell>Valor Unitário</Table.HeaderCell>
-                                  <Table.HeaderCell>Tempo de Entrega Minimo em Minutos</Table.HeaderCell>
-                                  <Table.HeaderCell>Tempo de Entrega Maximo em Minutos</Table.HeaderCell>
+                                  <Table.HeaderCell>Tempo de Entrega Minimo</Table.HeaderCell>
+                                  <Table.HeaderCell>Tempo de Entrega Maximo</Table.HeaderCell>
                         
                                   <Table.HeaderCell textAlign='center' width={2}>Ações</Table.HeaderCell>
                               </Table.Row>
@@ -72,27 +72,24 @@ class ListProduto extends React.Component{
                      
                           <Table.Body>
 
-                              { this.state.listaProduto.map(Produto => (
+                              { this.state.listaProduto.map(produto => (
 
                                   <Table.Row>
-                                      <Table.Cell>{Produto.nome}</Table.Cell>
-                                      <Table.Cell>{Produto.CodigodoProduto}</Table.Cell>
-                                      <Table.Cell>{Produto.Descricao}</Table.Cell>
-                                      <Table.Cell>{Produto.ValorUnitario}</Table.Cell>
-                                      <Table.Cell>{Produto.qtdEntregasrealizadas}</Table.Cell>
-                                      <Table.Cell>{Produto.TempodeEntregaMinimoemMinutos}</Table.Cell>
-                                      <Table.Cell>{Produto.TempodeEntregaMaximoemMinutos}</Table.Cell>
+                                      <Table.Cell>{produto.titulo}</Table.Cell>
+                                      <Table.Cell>{produto.codigo}</Table.Cell>
+                                      <Table.Cell>{produto.descricao}</Table.Cell>
+                                      <Table.Cell>{produto.valorUnitario}</Table.Cell>
+                                      <Table.Cell>{produto.tempoEntregaMinimo}</Table.Cell>
+                                      <Table.Cell>{produto.tempoEntregaMaximo}</Table.Cell>
 
                                       <Table.Cell textAlign='center'>
-
-                                         
                                           <Button
                                               inverted
                                               circular
                                               icon='edit'
                                               color='blue'
-                                              itle='Clique aqui para editar os dados deste Produto' /> &nbsp;
- <Button
+                                              title='Clique aqui para editar os dados deste Produto' /> &nbsp;
+                                              <Button
                                                    inverted
                                                    circular
                                                    icon='trash'

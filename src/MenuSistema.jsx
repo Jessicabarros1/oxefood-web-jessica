@@ -23,7 +23,7 @@ class MenuSistema extends React.Component{
                        to='/'
                    />
   
-  <Menu.Item
+                 <Menu.Item
                        name='cliente'
                        active={this.state.activeItem === 'cliente'}
                        onClick={this.handleItemClick}

@@ -30,7 +30,7 @@ class ListEntregador extends React.Component{
 
 formatarData = (dataParam) => {
 
-     if (dataParam == null || dataParam == '') {
+     if (dataParam === null || dataParam ==='') {
          return ''
      }
      
@@ -87,7 +87,7 @@ formatarData = (dataParam) => {
                                   <Table.HeaderCell>UF</Table.HeaderCell>
                                   <Table.HeaderCell>Complemento</Table.HeaderCell>
                                   <Table.HeaderCell>Ativo</Table.HeaderCell>
-                                  
+
                                   <Table.HeaderCell textAlign='center' width={2}>Ações</Table.HeaderCell>
                               </Table.Row>
                           </Table.Header>
@@ -113,21 +113,21 @@ formatarData = (dataParam) => {
                                       <Table.Cell>{Entregador.Ativo}</Table.Cell>
                                       <Table.Cell textAlign='center'>
                                          
-                                          <Button
-                                              inverted
-                                              circular
-                                              icon='edit'
-                                              color='blue'
-                                              itle='Clique aqui para editar os dados deste Entregador' /> &nbsp;
- <Button
+                                     <Button
+                                        inverted
+                                        circular
+                                        icon='edit'
+                                        color='blue'
+                                        itle='Clique aqui para editar os dados deste Entregador' /> &nbsp;
+                                    <Button
                                                    inverted
                                                    circular
                                                    icon='trash'
                                                    color='red'
                                                    title='Clique aqui para remover este Entregador' />
 
-                                           </Table.Cell>
-                                       </Table.Row>
+                                      </Table.Cell>
+                                 </Table.Row>
                                    ))}
 
                                </Table.Body>

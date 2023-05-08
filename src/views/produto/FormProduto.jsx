@@ -9,11 +9,11 @@ class FormProduto extends React.Component{
 	state = {
 
 		titulo: null,
-		CodigodoProduto: null,
-		Descricao: null,
-		ValorUnitario: null,
-		TempodeEntregaMinimoemMinutos: null,
-		TempodeEntregaMaximoemMinutos: null
+		codigo: null,
+		descricao: null,
+		valorUnitario: null,
+		tempodeEntregaMinimo: null,
+		tempodeEntregaMaximo: null
 	}
  
 	salvar = () => {
@@ -21,11 +21,11 @@ class FormProduto extends React.Component{
 		let ProdutoRequest = {
 
 			titulo: this.state.titulo,
-			CodigodoProduto: this.state.CodigodoProduto,
-			Descricao: this.state.Descricao,
-			ValorUnitario: this.state.ValorUnitario,
-			TempodeEntregaMinimoemMinutos: this.state.TempodeEntregaMinimoemMinutos,
-			TempodeEntregaMaximoemMinutos: this.state.TempodeEntregaMaximoemMinutos
+			codigodoProduto: this.state.codigo,
+			descricao: this.state.descricao,
+			valorUnitario: this.state.valorUnitario,
+			tempodeEntregaMinimoemMinutos: this.state.tempodeEntregaMinimo,
+			tempodeEntregaMaximoemMinutos: this.state.tempodeEntregaMaximo
 		}
 	
 		axios.post("http://localhost:8082/api/Produto", ProdutoRequest)
@@ -71,8 +71,8 @@ class FormProduto extends React.Component{
 										label='Código do Produto'>
 										<InputMask 
 										width={8}
-										value={this.state.CodigodoProduto}
-										onChange={e => this.setState({CodigodoProduto: e.target.value})}
+										value={this.state.codigo}
+										onChange={e => this.setState({codigo: e.target.value})}
 										>   
                                         </InputMask>
 
@@ -81,12 +81,12 @@ class FormProduto extends React.Component{
 								</Form.Group>
 								
                                    <Form.Field
-                                         id='form-textarea-control-Descrição'
+                                         id='form-textarea-control-Descricao'
                                          control={TextArea}
                                          label='Descrição'
                                          placeholder='Descreva o Produto'
-										value={this.state.Descricao}
-										onChange={e => this.setState({Descricao: e.target.value})} 
+										value={this.state.descricao}
+										onChange={e => this.setState({descricao: e.target.value})} 
                                     />
                     
                                 <Form.Group>
@@ -95,8 +95,8 @@ class FormProduto extends React.Component{
 										fluid
 										label='Valor Unitário'
                                         width={6}
-										value={this.state.ValorUnitario}
-										onChange={e => this.setState({ValorUnitario: e.target.value})} 
+										value={this.state.valorUnitario}
+										onChange={e => this.setState({valorUnitario: e.target.value})} 
 										>
 									</Form.Input>
 
@@ -104,8 +104,8 @@ class FormProduto extends React.Component{
                                         fluid
                                         label='Tempo de Entrega Mínimo em Minutos'
                                         width={6}
-										value={this.state.TempodeEntregaMinimoemMinutos}
-										onChange={e => this.setState({TempodeEntregaMinimoemMinutos: e.target.value})} 
+										value={this.state.tempodeEntregaMinimo}
+										onChange={e => this.setState({tempodeEntregaMinimo: e.target.value})} 
 										>
                                     </Form.Input>
 
@@ -113,8 +113,8 @@ class FormProduto extends React.Component{
                                         fluid
                                         label='Tempo de Entrega Maximo em Minutos'
                                         width={6}
-										value={this.state.TempodeEntregaMaximoemMinutos}
-										onChange={e => this.setState({TempodeEntregaMaximoemMinutos: e.target.value})}
+										value={this.state.tempodeEntregaMaximo}
+										onChange={e => this.setState({tempodeEntregaMaximo: e.target.value})}
 										>
                                     </Form.Input>
 
