@@ -57,7 +57,7 @@ class FormEntregador extends React.Component{
 			console.log('Entregador cadastrado com sucesso.')
 		})
 		.catch((error) => {
-			console.log('Erro ao incluir o um Entregador.')
+			console.log('Erro ao incluir um Entregador.')
 		})
 	}
 

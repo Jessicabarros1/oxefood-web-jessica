@@ -80,6 +80,7 @@ formatarData = (dataParam) => {
                                   <Table.HeaderCell>Fone Fixo</Table.HeaderCell>
                                   <Table.HeaderCell>Quantidade de Entregas Realizadas</Table.HeaderCell>
                                   <Table.HeaderCell>Rua</Table.HeaderCell>
+                                  <Table.HeaderCell>Rua</Table.HeaderCell>
                                   <Table.HeaderCell>Número</Table.HeaderCell>
                                   <Table.HeaderCell>Bairro</Table.HeaderCell>
                                   <Table.HeaderCell>Cidade</Table.HeaderCell>
@@ -112,7 +113,9 @@ formatarData = (dataParam) => {
                                       <Table.Cell>{Entregador.EnderecoComplemento}</Table.Cell>
                                       <Table.Cell>{Entregador.Ativo}</Table.Cell>
                                       <Table.Cell textAlign='center'>
-                                         
+
+                                  
+                                    
                                      <Button
                                         inverted
                                         circular
@@ -120,13 +123,13 @@ formatarData = (dataParam) => {
                                         color='blue'
                                         itle='Clique aqui para editar os dados deste Entregador' /> &nbsp;
                                     <Button
-                                                   inverted
-                                                   circular
-                                                   icon='trash'
-                                                   color='red'
-                                                   title='Clique aqui para remover este Entregador' />
+                                             inverted
+                                             circular
+                                             icon='trash'
+                                             color='red'
+                                             title='Clique aqui para remover este Entregador' />
 
-                                      </Table.Cell>
+                                     </Table.Cell>
                                  </Table.Row>
                                    ))}
 
