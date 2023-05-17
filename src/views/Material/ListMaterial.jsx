@@ -7,7 +7,7 @@ class ListMaterial extends React.Component{
 
    state = {
 
-       ListMaterial: []
+       listaMaterial: []
       
    }
 

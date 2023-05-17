@@ -64,7 +64,7 @@ class FormMaterial extends React.Component{
 										onChange={e => this.setState({titulo: e.target.value})} 
 									/>
 
-                                <Form.Group>
+                                
 									<Form.Input
                                         required
 										fluid
@@ -84,7 +84,6 @@ class FormMaterial extends React.Component{
 										onChange={e => this.setState({responsavel: e.target.value})} 
 									/>
 
-								</Form.Group>
 								
                                 <Form.Input
 										required
@@ -103,23 +102,11 @@ class FormMaterial extends React.Component{
 										label='Peso'
                                         width={6}
 										value={this.state.peso}
-										onChange={e => this.setState({Peso: e.target.value})} 
+										onChange={e => this.setState({peso: e.target.value})} 
 										>
 									</Form.Input>
 
-                    
-                                <Form.Group>
-									<Form.Input
-                                        required
-										fluid
-										label='Valor'
-                                        width={6}
-										value={this.state.valor}
-										onChange={e => this.setState({valor: e.target.value})} 
-										>
-									</Form.Input>
-
-                                    <Form.Group>
+                                   
                                        <Form.Input
                                             fluid
                                             label='Data de Aquisição'
@@ -169,8 +156,6 @@ class FormMaterial extends React.Component{
 										</Button>
 										</Container>
 
-								</Form.Group>
-                            </Form.Group>
                           </Form.Group>
                        </Form> 
                    </Container>
@@ -180,4 +165,4 @@ class FormMaterial extends React.Component{
       )  
     }
 }
-export default ListMaterial;
+export default FormMaterial;
