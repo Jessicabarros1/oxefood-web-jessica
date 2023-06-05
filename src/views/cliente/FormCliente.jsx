@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
 import { Link, useLocation } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import { ENDERECO_API } from '../../util/ENDERECO_API';
 
 export default function FormCliente() {
-	
 
 	const [idCliente, setIdCliente] = useState();
 	const [nome, setNome] = useState();
@@ -22,7 +22,7 @@ export default function FormCliente() {
 					setIdCliente(response.data.id)
 					setNome(response.data.nome)
 					setCpf(response.data.cpf)
-					setDataNascimento(response.data.dataNascimento)
+					setDataNascimento(formatarData(response.data.dataNascimento))
 					setFoneCelular(response.data.foneCelular)
 					setFoneFixo(response.data.foneFixo)
 				})
@@ -50,6 +50,20 @@ export default function FormCliente() {
 			.catch((error) => { console.log('Erro ao incluir o cliente.') })
 		} 
 	}
+
+	function formatarData(dataParam) {
+
+        if (dataParam == null || dataParam == '') {
+            return ''
+        }
+
+        let dia = dataParam.substr(8, 2);
+        let mes = dataParam.substr(5, 2);
+        let ano = dataParam.substr(0, 4);
+        let dataFormatada = dia + '/' + mes + '/' + ano;
+
+        return dataFormatada
+    };
 
 
 	return (
@@ -120,7 +134,7 @@ export default function FormCliente() {
 										maskChar={null}
 										placeholder="Ex: 20/03/1985"
 										value={dataNascimento}
-										onChange={e => dataNascimento(e.target.value)}
+										onChange={e => setDataNascimento(e.target.value)}
 									/>
 								</Form.Input>
 
@@ -135,7 +149,6 @@ export default function FormCliente() {
 									icon
 									labelPosition='left'
 									color='orange'
-									onClick={this.listar}
 								>
 									<Icon name='reply' />
 									<Link to={'/list-cliente'}>Voltar</Link>

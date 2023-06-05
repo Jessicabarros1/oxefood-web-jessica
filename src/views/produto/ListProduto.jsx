@@ -83,12 +83,14 @@ class ListProduto extends React.Component{
                                       <Table.Cell>{produto.tempoEntregaMaximo}</Table.Cell>
 
                                       <Table.Cell textAlign='center'>
-                                          <Button
-                                              inverted
-                                              circular
-                                              icon='edit'
-                                              color='blue'
-                                              title='Clique aqui para editar os dados deste Produto' /> &nbsp;
+                                            <Button
+                                                   inverted
+                                                   circular
+                                                   color='green'
+                                                        title='Clique aqui para editar os dados deste Produto'
+                                                        icon>
+                                                            <Link to="/form-Produto" state={{id: produto.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                                                </Button> &nbsp;
                                               <Button
                                                    inverted
                                                    circular

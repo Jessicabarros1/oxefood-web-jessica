@@ -18,7 +18,7 @@ class ListCliente extends React.Component {
     }
     carregarLista = () => {
 
-        axios.get("http://localhost:8082/api/cliente")
+        axios.get ("http://localhost:8082/api/cliente")
             .then((response) => {
 
                 this.setState({
@@ -93,12 +93,6 @@ class ListCliente extends React.Component {
                                             <Table.Cell>{cliente.foneFixo}</Table.Cell>
                                             <Table.Cell textAlign='center'>
 
-                                                <Button
-                                                    inverted
-                                                    circular
-                                                    icon='edit'
-                                                    color='blue'
-                                                    itle='Clique aqui para editar os dados deste cliente' /> &nbsp;
                                                 <Button
                                                     inverted
                                                     circular
