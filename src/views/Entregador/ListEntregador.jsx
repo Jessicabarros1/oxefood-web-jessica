@@ -5,11 +5,13 @@ import { Button, Container, Divider, Icon, Table } from 'semantic-ui-react';
 
 class ListEntregador extends React.Component{
 
-   state = {
+   
+    state = {
+        openModal: false,
+        idRemover: null,
+        listaClientes: []
 
-       listaEntregador: []
-      
-   }
+    }
 
    componentDidMount = () => {
       
@@ -41,6 +43,46 @@ formatarData = (dataParam) => {
 
      return dataFormatada
  };
+
+    confirmaRemover = (id) => {
+
+        this.setState({
+            openModal: true,
+            idRemover: id
+            })  
+            setOpenModal = (val) => {
+
+                this.setState({
+                    openModal: val
+                })
+        
+            };
+        
+        }
+
+        remover = async () => {
+
+            await axios.delete(ENDERECO_API + 'api/cliente/' + this.state.idRemover)
+            .then((response) => {
+       
+                this.setState({ openModal: false })
+                console.log('Cliente removido com sucesso.')
+       
+                axios.get(ENDERECO_API + "api/cliente")
+                .then((response) => {
+               
+                    this.setState({
+                        listaClientes: response.data
+                    })
+                })
+            })
+            .catch((error) => {
+                this.setState({  openModal: false })
+                console.log('Erro ao remover um cliente.')
+            })
+     };
+     
+ 
  render(){
     return(
         <div>
@@ -113,22 +155,25 @@ formatarData = (dataParam) => {
                                       <Table.Cell>{Entregador.EnderecoComplemento}</Table.Cell>
                                       <Table.Cell>{Entregador.Ativo}</Table.Cell>
                                       <Table.Cell textAlign='center'>
-
-                                  
                                     
-                                     <Button
-                                        inverted
-                                        circular
-                                        icon='edit'
-                                        color='blue'
-                                        itle='Clique aqui para editar os dados deste Entregador' /> &nbsp;
-                                    <Button
-                                             inverted
-                                             circular
-                                             icon='trash'
-                                             color='red'
-                                             title='Clique aqui para remover este Entregador' />
+                                                <Button
+                                                    inverted
+                                                    circular
+                                                    color='red'
+                                                    title='Clique aqui para remover este cliente'
+                                                    icon
+                                                    onClick={e => this.confirmaRemover(Entregador.id)}>
+                                                    <Icon name='trash' />
+                                                </Button>
 
+                                                <Button
+                                                        inverted
+                                                        circular
+                                                        color='green'
+                                                        title='Clique aqui para editar os dados deste entregador'
+                                                        icon>
+                                                            <Link to="/form-entregador" state={{id:Entregador.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                                                </Button> &nbsp;
                                      </Table.Cell>
                                  </Table.Row>
                                    ))}
@@ -137,6 +182,25 @@ formatarData = (dataParam) => {
                            </Table>
                        </div>
                    </Container>
+                   <Modal
+                            basic
+                            onClose={() => this.setOpenModal(false)}
+                            onOpen={() => this.setOpenModal(true)}
+                            open={this.state.openModal}
+                        >
+                            <Header icon>
+                                    <Icon name='trash' />
+                                    <div style={{marginTop: '5%'}}> Tem certeza que deseja remover esse registro? </div>
+                            </Header>
+                            <Modal.Actions>
+                                    <Button basic color='red' inverted onClick={() => this.setOpenModal(false)}>
+                                        <Icon name='remove' /> Não
+                                    </Button>
+                                    <Button color='green' inverted onClick={() => this.remover()}>
+                                        <Icon name='checkmark' /> Sim
+                                    </Button>
+                            </Modal.Actions>
+                        </Modal>
                </div>
            </div>
        )

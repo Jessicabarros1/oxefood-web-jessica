@@ -53,6 +53,21 @@ export default function FormProduto() {
 		} 
 	}
 
+	function formatarData(dataParam) {
+
+        if (dataParam == null || dataParam == '') {
+            return ''
+        }
+
+        let dia = dataParam.substr(8, 2);
+        let mes = dataParam.substr(5, 2);
+        let ano = dataParam.substr(0, 4);
+        let dataFormatada = dia + '/' + mes + '/' + ano;
+
+        return dataFormatada
+    };
+
+
         return(
             <div>
 
@@ -76,7 +91,7 @@ export default function FormProduto() {
 										label='Titulo'
 										maxLength="100"
 										value={titulo}
-										onChange={e => setTitulo(e.target.value)} 
+										onChange={e => setTitulo(e.target.value)}  
 									/>
 
 									<Form.Input
