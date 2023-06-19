@@ -24,7 +24,6 @@ export default function FormEntregador() {
 	const [enderecoComplemento, setEnderecoComplemento] = useState();
 	const [ativo, setAtivo] = useState();
 
-
 	const { state } = useLocation();
 	useEffect(() => {
 		if (state != null && state.id != null) {
@@ -53,7 +52,7 @@ export default function FormEntregador() {
 
 	 function salvar() {
 
-		let EntregadorRequest = {
+		let entregadorRequest = {
 			        nome:nome,
 					cpf:cpf,
 					dataNascimento: dataNascimento ,
@@ -69,19 +68,18 @@ export default function FormEntregador() {
 	                enderecoUf:enderecoUf,
 					enderecoComplemento: enderecoComplemento,
 	                ativo: ativo
-					
-				}
 		}
 
 		if (idEntregador != null) { //Alteração:
-			axios.put(ENDERECO_API + "api/entregador/" + idEntregador, <EntregadorRequest></EntregadorRequest>)
+			axios.put(ENDERECO_API + "api/entregador/" + idEntregador, entregadorRequest)
 			.then((response) => { console.log('Entregador alterado com sucesso.') })
 			.catch((error) => { console.log('Erro ao alterar um Entregador.') })
 		} else { //Cadastro:
-			axios.post(ENDERECO_API + "api/entregador", <EntregadorRequest></EntregadorRequest>)
+			axios.post(ENDERECO_API + "api/entregador", entregadorRequest)
 			.then((response) => { console.log('Entregador cadastrado com sucesso.') })
 			.catch((error) => { console.log('Erro ao incluir o entregador.') })
 		} 
+	}
 
 	function formatarData(dataParam) {
 
@@ -96,7 +94,6 @@ export default function FormEntregador() {
 
         return dataFormatada
     };
-
 
 const countryOptions = [
     { key: 'bh', value: 'bh', text: 'BH' },

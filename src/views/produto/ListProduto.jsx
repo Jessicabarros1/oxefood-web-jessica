@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React from "react";
-import { Link, } from "react-router-dom";
-import { Button, Container, Divider, Icon, Table } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
+import { Button, Container, Divider, Header, Icon, Modal, Table } from 'semantic-ui-react';
+import { ENDERECO_API } from '../../util/ENDERECO_API';
 
 class ListProduto extends React.Component{
 
@@ -35,13 +36,6 @@ class ListProduto extends React.Component{
             openModal: true,
             idRemover: id
             })  
-            setOpenModal = (val) => {
-
-                this.setState({
-                    openModal: val
-                })
-        
-            };
         
         }
     
@@ -66,6 +60,15 @@ class ListProduto extends React.Component{
                 console.log('Erro ao remover um cliente.')
             })
      };
+
+                 
+     setOpenModal = (val) => {
+
+        this.setState({
+            openModal: val
+        })
+
+    };
      
  render(){
     return(
