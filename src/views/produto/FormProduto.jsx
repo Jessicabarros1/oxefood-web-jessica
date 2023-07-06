@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InputMask from 'react-input-mask';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Container, Divider, Form, Icon, TextArea } from 'semantic-ui-react';
 import { ENDERECO_API } from '../../util/ENDERECO_API';
 
@@ -14,32 +14,47 @@ export default function FormProduto() {
 	const [valorUnitario, setValorUnitario] = useState();
 	const [tempodeEntregaMinimoemMinutos, setTempodeEntregaMinimoemMinutos] = useState();
 	const [tempodeEntregaMaximoemMinutos, setTempodeEntregaMaximoemMinutos] = useState();
+	const [listaCategoria, setListCategoria] = useState([]);
+	const [idCategoria, setIdCategoria] = useState();
+ 
 
-	const { state } = useLocation();
 	useEffect(() => {
+
 		if (state != null && state.id != null) {
-			axios.get(ENDERECO_API + "api/Produto/" + state.id)
-				.then((response) => {
-					setIdProduto(response.data.titulo)
-					setTitulo(response.data.codigo)
-					setCodigo(response.data.descricao)
-					setValorUnitario(response.data.valorUnitario)
-					setTempodeEntregaMinimoemMinutos(response.data.tempodeEntregaMinimoemMinutos)
-					setTempodeEntregaMaximoemMinutos(response.data.tempodeEntregaMaximoemMinutos)
-				})
+			axios.get(ENDERECO_API + "api/produto/" + state.id)
+			.then((response) => {
+				setIdProduto(response.data.id)
+				setCodigo(response.data.codigo)
+				setTitulo(response.data.titulo)
+				setDescricao(response.data.descricao)
+				setValorUnitario(response.data.valorUnitario)
+				setTempoEntregaMinimo(response.data.tempoEntregaMinimo)
+				setTempoEntregaMaximo(response.data.tempoEntregaMaximo)
+				setIdCategoria(response.data.categoria.id)
+			})
 		}
-	},[state])
+ 
+		axios.get(ENDERECO_API + "api/categoriaproduto")
+		.then((response) => {
+			const dropDownCategorias = response.data.map(c => ({ text: c.descricao, value: c.id }));
+			setListaCategoria(dropDownCategorias);
+		})
+ 
+	}, [state])
+ 
 
 
 	function salvar() {
 
 		let ProdutoRequest = {
+			idCategoria: idCategoria,
 			titulo: titulo,
 			codigo: codigo,
 			descricao: descricao,
 			valorUnitario: valorUnitario,
 			tempodeEntregaMinimo: tempodeEntregaMinimoemMinutos,
-			tempodeEntregaMaximo: tempodeEntregaMaximoemMinutos
+			tempodeEntregaMaximo: tempodeEntregaMaximoemMinutos	
+
 		}
 
 		if (idProduto != null) { //Alteração:
@@ -106,6 +121,19 @@ export default function FormProduto() {
                                         </InputMask>
 
 									</Form.Input>
+
+									<Form.Select
+											required
+											fluid
+											tabIndex='3'
+											placeholder='Selecione'
+											label='Categoria'
+											options={listaCategoria}
+											value={idCategoria}
+											onChange={(e,{value}) => {
+												setIdCategoria(value)
+											}}
+										/>
 
 								</Form.Group>
 								
