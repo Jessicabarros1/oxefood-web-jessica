@@ -11,7 +11,12 @@ class ListProduto extends React.Component{
         openModal: false,
         idRemover: null,
         listaClientes: []
-
+        menuFiltro: false,
+        codigo: '',
+        titulo: '',
+        idCategoria: '',
+        listaCategoriaProduto: []
+ 
     }
 
    componentDidMount = () => {
@@ -21,15 +26,69 @@ class ListProduto extends React.Component{
    }
    carregarLista = () => {
 
-    axios.get("http://localhost:8082/api/Produto")
+    axios.get(ENDERECO_API+ "api/produto")
     .then((response) => {
        
         this.setState({
             listaProduto: response.data
         })
     })
+    axios.get(ENDERECO_API + "api/categoriaproduto")
+    .then((response) => {
+
+        const dropDownCategorias = [];
+        dropDownCategorias.push({ text: '', value: '' });
+        response.data.map(c => (
+            dropDownCategorias.push({ text: c.descricao, value: c.id })
+        ))
+     
+        this.setState({
+            listaCategoriaProduto: dropDownCategorias
+        })
+    })
+
 
 };
+
+        handleMenuFiltro = () => {
+            this.state.menuFiltro === true ? this.setState({menuFiltro: false}) : this.setState({menuFiltro: true})
+        }
+
+        handleChangeCodigo = (e, {value}) => {
+            this.setState({
+                codigo: value
+            }, () => this.filtrarProdutos())
+        }
+
+        handleChangeTitulo = (e, {value}) => {
+            this.setState({
+                titulo: value
+            }, () => this.filtrarProdutos())
+        }
+
+        handleChangeCategoriaProduto = (e, { value }) => {
+            this.setState({
+                idCategoria: value,
+            }, () => this.filtrarProdutos())
+        }
+        filtrarProdutos = () => {
+
+            let formData = new FormData();
+     
+            formData.append('codigo', this.state.codigo);
+            formData.append('titulo', this.state.titulo);
+            formData.append('idCategoria', this.state.idCategoria);
+     
+            axios.post(ENDERECO_API + "api/produto/filtrar", formData)
+            .then((response) => {
+                this.setState({
+                    listaProdutos: response.data
+                })
+            })
+       
+        }
+     
+
     confirmaRemover = (id) => {
 
         this.setState({
@@ -79,6 +138,18 @@ class ListProduto extends React.Component{
                 <Container textAlign='justified' >
 
                     <h2> Produto </h2>
+
+
+                    <Menu compact>
+                               <Menu.Item
+                                   name='menuFiltro'
+                                   active={this.state.menuFiltro === true}
+                                   onClick={this.handleMenuFiltro}
+                               >
+                                   <Icon name='filter' />
+                                   Filtrar
+                               </Menu.Item>
+                           </Menu>
 
                     <Divider />
 
@@ -145,6 +216,51 @@ class ListProduto extends React.Component{
                                                     onClick={e => this.confirmaRemover(produto.id)}>
                                                     <Icon name='trash' />
                                                 </Button>
+                                                <Button
+                                                    label='Novo'
+                                                    circular
+                                                    color='orange'
+                                                    icon='clipboard outline'
+                                                    floated='right'
+                                                    as={Link}
+                                                    to='/form-produto'
+                                                    />
+
+                                                    { this.state.menuFiltro ?
+                                                    <Segment>
+                                                        <Form className="form-filtros">
+                                                            <Form.Input
+                                                                icon="search"
+                                                                value={this.state.codigo}
+                                                                onChange={this.handleChangeCodigo}
+                                                                label='Código do Produto'
+                                                                placeholder='Filtrar por Código do Produto'
+                                                                labelPosition='left'
+                                                                width={4}
+                                                            />
+                                                                <Form.Group widths='equal'>
+                                                                <Form.Input
+                                                                icon="search"
+                                                                value={this.state.titulo}
+                                                                onChange={this.handleChangeTitulo}
+                                                                label='Título'
+                                                                placeholder='Filtrar por título'
+                                                                labelPosition='left'
+                                                                />                              
+                                                                <Form.Select
+                                                                placeholder='Filtrar por Categoria'
+                                                                label='Categoria'
+                                                                options={this.state.listaCategoriaProduto}
+                                                                value={this.state.idCategoria}
+                                                                onChange={this.handleChangeCategoriaProduto}
+                                                                /> 
+                                                            </Form.Group>
+                                                        </Form>
+                                                    </Segment>:""
+}
+
+
+
 
                                            </Table.Cell>
                                        </Table.Row>
